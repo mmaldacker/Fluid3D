@@ -14,8 +14,8 @@ file(GLOB LIB_SOURCES "pcgsolver/*.h"
                       "array3_utils.h"
                       "fluidsim.h"
                       "fluidsim.cpp"
-                      "levelset.h"
-                      "levelset.cpp"
+                      "levelset_util.h"
+                      "levelset_util.cpp"
                       "util.h"
                       "vec.h")
 
