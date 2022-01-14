@@ -20,6 +20,7 @@ file(GLOB LIB_SOURCES "pcgsolver/*.h"
                       "vec.h")
 
 add_library(fluid3d_lib STATIC ${LIB_SOURCES})
+target_include_directories(fluid3d_lib PUBLIC ./)
 
 # Build the executable
 add_executable(fluid3d_solver ${LIB_SOURCES} main.cpp)
