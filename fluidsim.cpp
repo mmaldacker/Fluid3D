@@ -82,32 +82,25 @@ void FluidSim::advance(float dt) {
     float substep = cfl();
     if (t + substep > dt)
       substep = dt - t;
-    printf("Taking substep of size %f (to %0.3f%% of the frame)\n", substep,
-           100 * (t + substep) / dt);
 
-    printf(" Surface (particle) advection\n");
     advect_particles(substep);
 
-    printf(" Velocity advection\n");
     // Advance the velocity
     advect(substep);
     add_force(substep);
 
-    printf(" Pressure projection\n");
     project(substep);
 
     // Pressure projection only produces valid velocities in faces with non-zero
     // associated face area. Because the advection step may interpolate from
     // these invalid faces, we must extrapolate velocities from the fluid domain
     // into these invalid faces.
-    printf(" Extrapolation\n");
     extrapolate(u, u_valid);
     extrapolate(v, v_valid);
     extrapolate(w, w_valid);
 
     // For extrapolated velocities, replace the normal component with
     // that of the object.
-    printf(" Constrain boundary velocities\n");
     constrain_velocity();
 
     t += substep;
